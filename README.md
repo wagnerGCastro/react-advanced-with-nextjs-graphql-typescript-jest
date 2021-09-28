@@ -15,3 +15,6 @@ This project uses lot of stuff as:
 - [Husky](https://github.com/typicode/husky)
 
 
+## Stacks Backend
+
+This project uses lot of stuff as:
