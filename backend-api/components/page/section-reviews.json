@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_page_section_reviews",
+  "info": {
+    "name": "sectionReviews",
+    "icon": "id-card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "cardReviews": {
+      "type": "component",
+      "repeatable": true,
+      "component": "page.card-reviews"
+    }
+  }
+}
