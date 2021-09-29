@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_page_card_text_lists",
+  "info": {
+    "name": "cardTextList",
+    "icon": "sim-card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subTitle": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true,
+      "maxLength": 100
+    }
+  }
+}
