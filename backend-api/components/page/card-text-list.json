@@ -2,7 +2,8 @@
   "collectionName": "components_page_card_text_lists",
   "info": {
     "name": "cardTextList",
-    "icon": "sim-card"
+    "icon": "sim-card",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -16,8 +17,7 @@
     },
     "description": {
       "type": "richtext",
-      "required": true,
-      "maxLength": 100
+      "required": true
     }
   }
 }
