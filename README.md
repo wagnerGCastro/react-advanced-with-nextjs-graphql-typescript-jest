@@ -18,3 +18,11 @@ This project uses lot of stuff as:
 ## Stacks Backend
 
 This project uses lot of stuff as:
+
+## DOCKER FILES
+  - pgadmin4
+    https://github.com/postgres/pgadmin4
+
+## Comands
+  - Init containers
+  $ docker-compose -f ./docker-compose.dev.yml up -d postgres webserver strapi pgadmin4
