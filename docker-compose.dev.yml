@@ -1,37 +1,60 @@
 version: '3'
 
 services:
+  webserver:
+    build: 
+      context: ./bin/webserver
+    container_name: 'strapi_php:7.1.x-webserver'
+    restart: 'always'
+    ports:
+      - "8005:80"
+      - "4438:443"
+    links: 
+      - postgres
+    volumes: 
+      - ${DOCUMENT_ROOT-./www}:/var/www/html
+      - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
+      - ${VHOSTS_DIR-./config/vhosts}:/etc/apache2/sites-enabled
+      - ${LOG_DIR-./logs/apache2}:/var/log/apache2
+
   strapi:
     image: strapi/strapi
+    container_name: 'strapi_webserver'
     environment:
-      DATABASE_CLIENT: mysql
-      DATABASE_HOST: mysql
-      DATABASE_PORT: 3338
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: strapi
+      DATABASE_PORT: 5432
       DATABASE_NAME: strapi
       DATABASE_USERNAME: strapi
       DATABASE_PASSWORD: strapi
-      DATABASE_SSL: 'false'
     volumes:
-      - ./backend-api:/srv/app
+      - ./www/backend-api:/srv/app
     ports:
       - '1337:1337'
     depends_on:
-      - mysql
+      - postgres
 
   postgres:
-    image: postgres
+    # image: postgres:12.3-alpine
+    build: 
+      context: ./bin/postgres/12/alpine
+    container_name: 'strapi_postgres'
+    # privileged: true
     restart: always
-    volumes:
-      - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: strapi
       POSTGRES_PASSWORD: strapi
       POSTGRES_DB: strapi
     ports:
       - '5432:5432'
+    volumes: 
+      - ${POSTGRES_SQL_DATA_DIR-./data/postgres}:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+      - ${POSTGRES_SQL_LOG_DIR-./logs/postgres}:/var/log/postgresql
 
   mongo:
     image: mongo
+    container_name: 'strapi-mongo'
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -42,7 +65,7 @@ services:
       - '27017:27017'
 
   mysql:
-    image: mysql
+    build: ./bin/mysql
     container_name: strapi_mysql
     restart: always
     command: --default-authentication-plugin=mysql_native_password
@@ -52,12 +75,54 @@ services:
       MYSQL_PASSWORD: strapi
       MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: strapi
-    volumes:
-      - mysqldata:/var/lib/mysql
+    volumes: 
+      - ${MYSQL_DATA_DIR-./data/mysql}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR-./logs/mysql}:/var/log/mysql
     ports:
       - '3338:3306'
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: 'strapi-phpmyadmin'
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - '8089:80'
+    volumes: 
+      - /sessions
+
+  pgadmin4:
+    image: "dpage/pgadmin4"
+    # build: 
+    #   context: ./bin/pgadmin4
+    container_name: 'strapi_pgadmin4'
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "15433:80"
+    volumes:
+      - ./data/pgadmin4:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
+  redis:
+    image: redis:latest
+    container_name: 'strapi-redis'
+    restart: always
+    ports:
+      - "63780:6379"
+    volumes:
+      - ./storage/redis/data:/data
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
 volumes:
+  # pgdata-vol:  ${POSTGRES_SQL_DATA_DIR-./data/postgres}
   pgdata:
   mongodata:
   mysqldata:
