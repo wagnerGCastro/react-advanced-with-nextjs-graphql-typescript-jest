@@ -26,3 +26,4 @@ This project uses lot of stuff as:
 ## Comands
   - Init containers
   $ docker-compose -f ./docker-compose.dev.yml up -d postgres webserver strapi pgadmin4
+  

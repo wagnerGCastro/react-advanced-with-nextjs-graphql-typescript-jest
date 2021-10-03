@@ -122,7 +122,6 @@ services:
       - REDIS_REPLICATION_MODE=master
 
 volumes:
-  # pgdata-vol:  ${POSTGRES_SQL_DATA_DIR-./data/postgres}
   pgdata:
   mongodata:
   mysqldata:
