@@ -8,3 +8,4 @@
 /assets
 data/postgres/wsl-data
 /node_modules
+_node_modules
