@@ -22,8 +22,12 @@ This project uses lot of stuff as:
 ## DOCKER FILES
   - pgadmin4
     https://github.com/postgres/pgadmin4
+  - postgres
+    https://github.com/docker-library/postgres 
 
 ## Comands
+  - Init Backend API
+    $ cd ./www/backend-api && yarn isntall && yarn dev
   - Init containers
-  $ docker-compose -f ./docker-compose.dev.yml up -d postgres webserver strapi pgadmin4
+    $  docker-compose -f ./docker-compose.dev.yml up -d postgres pgadmin4
   
