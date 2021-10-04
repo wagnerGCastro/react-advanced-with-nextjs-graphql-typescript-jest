@@ -27,7 +27,7 @@ This project uses lot of stuff as:
 
 ## Comands
   - Init Backend API
-    $ cd ./www/backend-api && yarn isntall && yarn dev
+    $ cd ./www/backend-api && npm isntall && npm run dev
   - Init containers
     $  docker-compose -f ./docker-compose.dev.yml up -d postgres pgadmin4
   
