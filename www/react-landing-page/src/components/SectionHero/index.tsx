@@ -6,18 +6,23 @@ import * as S from './styles'
 
 import { gaEvent } from 'utils/ga'
 import Container from 'components/Container'
+import { LandingPageProps, LogoProps } from 'types/api'
 
 const onClick = () =>
   gaEvent({ action: 'click', category: 'cta', label: 'hero button' })
 
-const SectionHero = () => (
+type Props = {
+  logo: LogoProps
+}
+
+const SectionHero = ({ logo }: Props) => (
   <S.Wrapper>
     <Container>
-      <Logo />
+      <Logo {...logo} />
 
       <S.Content>
         <S.TextBlock>
-          <S.Title>React Avançado 8</S.Title>
+          <S.Title>React Avançado </S.Title>
           <S.Description>
             Crie aplicações reais com NextJS, Strapi, GraphQL e mais!
           </S.Description>
