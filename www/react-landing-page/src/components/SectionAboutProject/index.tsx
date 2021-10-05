@@ -2,48 +2,34 @@ import React from 'react'
 
 import Heading from 'components/Heading'
 import Container from 'components/Container'
+import { SectionAboutProjectProps } from 'types/api'
+import * as H from 'utils/helpers'
 
 import * as S from './styles'
 
-const SectionAboutProject = () => (
+type Props = {
+  sap: SectionAboutProjectProps
+}
+
+const SectionAboutProject = ({ sap }: Props) => (
   <S.Wrapper>
     <Container>
       <S.Container>
         <S.Image>
           <source
-            srcSet={require('@images/project.png?webp')}
+            srcSet={H.getImageUrl(`${sap.image.url}?webp`)}
             type="image/webp"
           />
-          <source srcSet={require('@images/project.png')} type="image/png" />
+          <source srcSet={H.getImageUrl(sap.image.url)} type="image/png" />
           <img
-            src={require('@images/project.png')}
+            src={H.getImageUrl(sap.image.url)}
             loading="lazy"
-            alt="Tela do ecommerce com uma imagem do CMS por trás"
+            alt={sap.image.alternativeText}
           />
         </S.Image>
         <div>
-          <Heading>O que iremos construir</Heading>
-          <S.Text>
-            <p>
-              Iremos criar um e-commerce de jogos, incluindo toda a parte de
-              pagamentos e área do cliente. Os clientes poderão fazer buscas,
-              filtrar, adicionar ao carrinho e comprar seus jogos favoritos.
-            </p>
-
-            <p>
-              Teremos também um <strong>CMS completamente customizado</strong>{' '}
-              para que os administradores possam adicionar produtos, categorias,
-              plataformas, criar promoções, editar partes do site, além de
-              emails automatizados para às vendas de cada produto.
-            </p>
-
-            <p>
-              Para criar tudo isso, iremos utilizar ferramentas muito famosas no
-              mercado de trabalho, como ReactJS, Next, Apollo e outras coisas
-              mais. Sempre prezando pela qualidade do código, ou seja, teremos{' '}
-              <strong>testes em tudo!</strong>
-            </p>
-          </S.Text>
+          <Heading>{sap.title}</Heading>
+          <S.Text dangerouslySetInnerHTML={{ __html: sap.description }} />
         </div>
       </S.Container>
     </Container>
