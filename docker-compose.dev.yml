@@ -106,7 +106,8 @@ services:
     ports:
       - "15433:80"
     volumes:
-      - ./data/pgadmin4:/var/lib/pgadmin
+      # - ./data/pgadmin4:/var/lib/pgadmin
+      - pgadmindata:/var/lib/pgadmin
     depends_on:
       - postgres
 
@@ -123,5 +124,6 @@ services:
 
 volumes:
   pgdata:
+  pgadmindata:
   mongodata:
   mysqldata:
