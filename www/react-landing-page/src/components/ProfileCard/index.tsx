@@ -3,6 +3,7 @@ import React from 'react'
 import { GrGithub } from 'react-icons/gr'
 import { FaDribbble, FaTwitter } from 'react-icons/fa'
 
+import * as H from 'utils/helpers'
 import * as S from './styles'
 
 const icons = {
@@ -12,8 +13,8 @@ const icons = {
 }
 
 type socialLinks = {
-  slug: string
-  link: string
+  title: string
+  url: string
 }
 
 type Props = {
@@ -33,24 +34,17 @@ const ProfileCard: React.FC<Props> = ({
 }) => (
   <S.Card key={name}>
     <S.Image>
-      <source
-        srcSet={require(`@images/authors/${image}?webp`)}
-        type="image/webp"
-      />
-      <source srcSet={require(`@images/authors/${image}`)} type="image/png" />
-      <img
-        src={require(`@images/authors/${image}`)}
-        loading="lazy"
-        alt={name}
-      />
+      <source srcSet={H.getImageUrl(`${image}?webp`)} type="image/webp" />
+      <source srcSet={H.getImageUrl(`${image}`)} type="image/png" />
+      <img src={H.getImageUrl(`${image}`)} loading="lazy" alt={name} />
     </S.Image>
     <S.Name>{name}</S.Name>
     <S.Role>{role}</S.Role>
     <S.SocialLinks>
       {socialLinks.map((item) => (
-        <S.Link key={item.link}>
-          <a href={item.link} title={item.slug}>
-            {icons[item.slug]}
+        <S.Link key={item.url}>
+          <a href={item.url} title={item.title}>
+            {icons[item.title]}
           </a>
         </S.Link>
       ))}
