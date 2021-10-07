@@ -60,7 +60,7 @@ export type SectionAgendaProps = {
   description: string
 }
 
-export type pricingBoxProps = {
+export type PricingBoxProps = {
   totalPrice: number
   numberInstallments: number
   priceInstallments: number
@@ -73,39 +73,39 @@ export type pricingBoxProps = {
 
 export type SectionAboutUsProps = {
   title: string
-  authors: {
+  authors: Array<{
     photo: {
       alternativeText: string
       url: string
     }
     name: string
     role: string
-    socialLinks: {
+    socialLinks: Array<{
       title: string
       url: string
-    }
+    }>
     description: string
-  }
+  }>
 }
 
-export type SectionReviewsUsProps = {
+export type SectionReviewsProps = {
   title: string
-  cardReviews: {
+  cardReviews: Array<{
     name: string
     photo: {
       alternativeText: string
       url: string
     }
     description: string
-  }
+  }>
 }
 
 export type SectionFaqProps = {
   title: string
-  questions: {
-    nquestioname: string
+  questions: Array<{
+    question: string
     answer: string
-  }
+  }>
 }
 
 export type LandingPageProps = {
@@ -115,9 +115,9 @@ export type LandingPageProps = {
   sectionTech: SectionTechProps
   sectionModules: SectionModulesProps
   sectionAgenda: SectionAgendaProps
-  pricingBox: pricingBoxProps
-  sectionAboutUsProps: SectionAboutUsProps
-  sectionReviews: SectionReviewsUsProps
+  pricingBox: PricingBoxProps
+  sectionAboutUs: SectionAboutUsProps
+  sectionReviews: SectionReviewsProps
   sectionFaq: SectionFaqProps
-  sectionConcepts: sectionConceptsProps
+  sectionConcepts: SectionConceptsProps
 }

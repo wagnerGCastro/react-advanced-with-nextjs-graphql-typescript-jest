@@ -1,10 +1,8 @@
 import React from 'react'
-
 import Heading from 'components/Heading'
 import Container from 'components/Container'
 import { SectionAboutProjectProps } from 'types/api'
 import * as H from 'utils/helpers'
-
 import * as S from './styles'
 
 type Props = {
